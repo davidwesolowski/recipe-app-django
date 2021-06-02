@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Przygotuj to sam!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="{% static 'style/style.css' %}" rel="stylesheet" />
+    <link rel="icon" href="{% static 'logo.png' %}" />
+</head>
+<body>
+    <div class="containerApp">
+        <div class="sidebar">
+            <h1 class="titleApp">Przygotuj to sam!</h1>
+            <a href="/">
+                <img src="{% static 'logo.png' %}"/>
+            </a>
+            <hr />
+            <div class="sidebarLinks">
+                <a href="/">Strona główna</a>
+                <hr />
+                {% if user.is_authenticated %}
+                    <a href="/create">Utwórz przepis</a>
+                    <hr />
+                    <a href="/profile">Profil</a>
+                    <hr />
+                {% endif %}
+            </div>
+            <hr />
+            {% if user.is_authenticated %}
+                <a href="/logout" class="logout">Wyloguj</a>
+            {% else %}
+                <a href="/login" class="logout">Zaloguj</a>
+            {% endif %}
+        </div>
+        <div id="content" name="content" class="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>

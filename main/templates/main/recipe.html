@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class='recipeCard'>
+        <div class="card" style="width: 50rem;">
+            <img src="{{ recipe.imageUrl }}" alt="img-{{ row.recipe.title }}">
+            <div class="card-body recipeDetails">
+                <h4 class="card-title">Autor: {{ user.name }}</h4>
+                <h3 class="card-title">Przepis na: {{ recipe.title }}</h3>
+                <p class="card-text recipeDescription">{{ recipe.description }}</p>
+                <a href="edit/{{ recipe.id }}" class="btn btn-primary buttonLink">Edytuj</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Usuń
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title recipeModalTitle" id="exampleModalLabel">Czy na pewno chcesz usunąć przepis?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="delete/{{ recipe.id }}">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                                    <button type="submit" class="btn btn-danger">Usuń</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

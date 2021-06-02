@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class='row gy-5 recipesList'>
+        <div class='col-sm-12'><h1>Przepisy kulinarne</h1></div>
+        {% if all_recipes|length > 0 %}
+            {% for row in all_recipes %}
+                <div class='col-sm-3'>
+                    <div class="card" style="width: 25rem;">
+                      <img src="{{ row.recipe.imageUrl }}" class="card-img-top recipeListImg" alt="img-{{ row.recipe.title }}">
+                      <div class="card-body">
+                          <h4 class="card-title">Autor: {{ row.author }}</h4>
+                          <h3 class="card-title">{{ row.recipe.title }}</h3>
+                          <a href="/{{ row.recipe.id }}" class="btn btn-primary buttonLink">Sprawdź szczegóły</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+         <div class="noRecipes">
+            <h1>Brak przepisów.</h1>
+         </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,160 @@
+html {
+    font-size: 62.5%;
+}
+
+hr {
+    width: 90%;
+    color: #01579B;
+}
+
+label {
+    font-size: 1.4rem !important;
+}
+
+input, textarea, button {
+    font-size: 1.6rem !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerApp {
+    display: flex;
+}
+
+.sidebar {
+    flex-basis: 15%;
+    height: 100vh;
+    background-color: #00B0FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    display: block;
+    width: 10rem;
+    heigt: 10rem;
+}
+
+.titleApp {
+    color: #fff;
+    margin: 1.5rem 0;
+}
+
+.sidebarLinks {
+    flex-basis: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebarLinks a {
+    display: flex;
+    font-size: 1.6rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.content {
+    flex-basis: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.logout {
+    flex-basis: 10%;
+    justify-content: flex-end;
+    font-size: 1.6rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logout:active, .sidebarLinks a:active {
+    color: #fff;
+}
+
+.logout:hover, .sidebarLinks a:hover {
+    color: #E1F5FE;
+}
+
+.createForm {
+    flex-basis: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.createForm > form {
+    width: 100%;
+}
+
+.recipesList {
+    flex-basis: 90%;
+}
+
+.buttonLink {
+    font-size: 1.6rem;
+}
+
+.notFoundBox {
+    display: grid;
+    place-items: center;
+}
+
+.notFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #01579B;
+    border-radius: 2rem;
+    padding: 3rem;
+}
+
+.errorTitle {
+    display: flex;
+    align-items: center;
+}
+
+.errorTitle h1 {
+    margin-left: 1rem;
+}
+
+.recipeDetails {
+    padding-bottom: 5rem;
+}
+
+.recipeDescription {
+    border-top: 1px solid #01579B;
+    padding: 2rem 0;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    white-space: pre-wrap;
+}
+
+.recipeModalTitle {
+    font-size: 1.6rem;
+}
+
+.recipeCard {
+    display: grid;
+    place-items: center;
+}
+
+.recipeListImg {
+    width: 25rem;
+    height: 16rem;
+}
+
+.noRecipes {
+    display: grid;
+    place-items: center;
+}
