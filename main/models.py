@@ -19,6 +19,7 @@ class Roles(enum.Enum):
 class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, name, password, **other_fields):
+        other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
         other_fields.setdefault('rola', Roles.ADMIN)
         return self.create_user(email, name, password, **other_fields)
@@ -41,6 +42,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     name = models.CharField('Nazwa', max_length=200)
     email = models.EmailField('Adres email', unique=True)
     rola = enum.EnumField(Roles)
+    is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
