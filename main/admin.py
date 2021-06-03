@@ -3,8 +3,16 @@ from django.contrib.auth.models import Group
 from .models import Users, Recipes
 
 # Register your models here.
-admin.site.register(Users)
-admin.site.register(Recipes)
+
+
+class MyAdmin(admin.ModelAdmin):
+
+    def has_add_permission(self, request):
+        return False
+
+
+admin.site.register(Users, MyAdmin)
+admin.site.register(Recipes, MyAdmin)
 admin.site.unregister(Group)
 
 '''

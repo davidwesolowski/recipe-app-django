@@ -3,10 +3,43 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <form method="post" class="form-group">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Zaloguj</button>
-        <p><a href="/register">Nie masz konta? Zarejestruj się.</a></p>
-    </form>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-md-12">
+                <div class="login d-flex align-items-center py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-lg-6  mx-auto">
+                                <form class="form-group border border-primary rounded p-4 shadow p-3 mb-5 bg-white rounded" action="/login/" method="post">
+
+                                    {% csrf_token %}
+                                    <h3 class="mb-4 text-center">Zaloguj się</h3>
+
+                                    {% if form.errors %}
+                                    <div class="alert alert-primary" role="alert">
+                                        Błąd: Email lub hasło jest nieprawidłowe!
+                                    </div>
+                                    {% endif %}
+
+                                    <label class="form-label">{{ form.email.label}}</label>
+                                    {{ form.email}}
+
+                                    <label class="form-label">{{ form.password.label}}</label>
+                                    {{ form.password}}
+                                    <div class="d-grid gap-2">
+                                        <input type="hidden" name="next" value="{{ next }}">
+                                        <button class="btn btn-primary mt-4 fw-bold" type="submit">Zaloguj
+                                        </button>
+                                    </div>
+                                    <p class="mt-4 d-flex justify-content-end">
+                                        <a href='/register/' class="text-decoration-none text-reset text-dark" style="font-size: 14px; font-weight: 500;">Zarejestruj się</a>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -56,8 +56,8 @@ body {
 .sidebarLinks a {
     display: flex;
     font-size: 1.6rem;
-    color: #fff;
     text-decoration: none;
+    color: #fff;
 }
 
 .content {
