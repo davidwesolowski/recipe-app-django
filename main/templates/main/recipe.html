@@ -13,7 +13,7 @@
             <div class="card-body recipeDetails">
                 <p class="card-text recipeDescription">{{ recipe.description }}</p>
                 {% if user.is_authenticated %}
-                    {% if recipe.userId.id == user.id or role == 'ADMINISTRATOR' %}
+                    {% if recipe.userID.id == user.id or role == 'ADMINISTRATOR' %}
                         <a href="edit/{{ recipe.id }}" class="btn btn-primary buttonLink">Edytuj</a>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Usuń

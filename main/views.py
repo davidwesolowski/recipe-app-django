@@ -13,6 +13,7 @@ def index(response):
     all_recipes = []
     users = Users.objects.all()
     for user in users:
+        print(user.id)
         for recipe in user.recipes_set.all():
             all_recipes.append({'author': user.name, 'recipe': {"id": recipe.id, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
     for user in users:
@@ -22,14 +23,10 @@ def index(response):
     return render(response, 'main/recipes-list.html', {'all_recipes': all_recipes})
 
 
-def home(response):
-    return render(response, 'main/home.html', {})
-
-
 def recipe(response, id):
     try:
         recipe = Recipes.objects.get(id=id)
-        user = Users.objects.get(id=recipe.userId.id)
+        user = Users.objects.get(id=recipe.userID.id)
         role = str(response.user.rola)
         return render(response, 'main/recipe.html', {'userInfo': user, 'role': role, 'recipe': recipe, 'error': ''})
     except:
@@ -40,7 +37,7 @@ def recipe(response, id):
 def delete_recipe(response, id):
     try:
         recipe = Recipes.objects.get(id=id)
-        if response.user and response.user.id == recipe.userId.id:
+        if response.user and response.user.id == recipe.userID.id:
             recipe.delete()
         return HttpResponseRedirect('/')
     except:
@@ -81,7 +78,7 @@ def edit_recipe(response, id):
     else:
         try:
             recipe = Recipes.objects.get(id=id)
-            if response.user and response.user.id == recipe.userId.id:
+            if response.user and response.user.id == recipe.userID.id:
                 form = CreateRecipeForm(initial={
                     'title': recipe.title, 'description': recipe.description, 'imageUrl': recipe.imageUrl
                 })

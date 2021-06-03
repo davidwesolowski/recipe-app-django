@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django_enumfield import enum
 from django.contrib.auth.models import (
@@ -32,9 +33,7 @@ class Users(models.Model):
 class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, name, password, **other_fields):
-        other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_active', True)
         other_fields.setdefault('rola', Roles.ADMIN)
         return self.create_user(email, name, password, **other_fields)
 
@@ -52,13 +51,10 @@ class CustomUserManager(BaseUserManager):
 
 
 class Users(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     name = models.CharField('Nazwa', max_length=200)
     email = models.EmailField('Adres email', unique=True)
     rola = enum.EnumField(Roles)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     objects = CustomUserManager()
 
@@ -74,12 +70,14 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
 
 class Recipes(models.Model):
-    userId = models.ForeignKey(Users, on_delete=models.CASCADE)
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    userID = models.ForeignKey(Users, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=2048)
     imageUrl = models.CharField(max_length=255)
 
     class Meta:
+        verbose_name = 'Recipes'
         verbose_name_plural = 'Recipes'
 
     def __str__(self):
