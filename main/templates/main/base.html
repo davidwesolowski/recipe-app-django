@@ -16,8 +16,13 @@
             <a href="/">
                 <img src="{% static 'logo.png' %}"/>
             </a>
-            <hr />
-            <div class="sidebarLinks">
+            <div class="sidebarLinks mt-3">
+                {% if user.is_authenticated %}
+                    <a href="/profile">Zalogowany: {{ user.name }}</a>
+                    <hr />
+                {% else %}
+                    <hr />
+                {% endif %}
                 <a href="/">Strona główna</a>
                 <hr />
                 {% if user.is_authenticated %}

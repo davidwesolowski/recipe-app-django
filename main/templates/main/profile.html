@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="createForm form-group border border-primary rounded p-4 shadow p-3 mb-5 bg-white rounded">
+        <form method="post" action="/profile/">
+            <h1 class="text-center mb-4">Profil użytkownika</h1>
+            {% csrf_token %}
+            {% if form.errors %}
+                <p>Popraw następujące błędy:</p>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="alert alert-primary" role="alert">
+                            {{ field.label }}: {{ field.errors|striptags }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Zaktualizuj</button>
+            {% if successName %}
+                <div class="alert alert-success mt-4" style="font-size: 16px;" role="alert">
+                    {{ successName }}
+                </div>
+            {% endif %}
+            {% if succcessPassword %}
+                <div class="alert alert-success mt-4" style="font-size: 16px;" role="alert">
+                    {{ succcessPassword }}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

@@ -15,6 +15,10 @@ input, textarea, button {
     font-size: 1.6rem !important;
 }
 
+ul.errorlist {
+    display:none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -157,4 +161,8 @@ body {
 .noRecipes {
     display: grid;
     place-items: center;
+}
+
+.alertFontSize {
+    font-size: 14px;
 }

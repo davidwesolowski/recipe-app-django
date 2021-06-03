@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from main.models import Roles
@@ -6,7 +7,7 @@ from main.models import Roles
 
 def register(response):
     if response.user.is_authenticated:
-        redirect('/')
+        return redirect('/')
     if response.method == "POST":
         form = RegisterForm(response.POST)
         if form.is_valid():
@@ -25,6 +26,8 @@ def register(response):
 
 
 def login_view(response):
+    if response.user.is_authenticated:
+        return redirect('/')
     if response.method == 'POST':
         form = LoginForm(response.POST)
         if form.is_valid():
@@ -43,6 +46,7 @@ def login_view(response):
     return render(response, 'registration/login.html', {'form': form})
 
 
+@login_required
 def logout_view(response):
     logout(response)
     return redirect('/login')

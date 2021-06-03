@@ -133,3 +133,4 @@ AUTH_USER_MODEL = 'main.Users'
 AUTHENTICATION_BACKENDS = ['register.forms.EmailBackend']
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+LOGIN_URL = '/login'
