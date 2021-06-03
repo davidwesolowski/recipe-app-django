@@ -9,7 +9,6 @@
                     <h3 class="mb-2 font-weight-bold text-center">Zarejestruj się</h3>
 
                     {% if form.errors %}
-                        <p>Popraw następujące błędy:</p>
                         {% for field in form %}
                             {% if field.errors %}
                                 <div class="alert alert-danger alertFontSize" role="alert">

@@ -2,12 +2,12 @@
 
 {% block content %}
     <div class="createForm form-group border border-primary rounded p-4 shadow p-3 mb-5 bg-white rounded">
-        <form method="post" action="/edit/{{ recipe.id }}">
+        <form method="post" action="/edit/{{ recipe.ID }}">
             {% csrf_token %}
             <h1>Edytuj przepis: {{ recipe.title }}</h1>
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Edytuj</button>
-            <a href="/{{ recipe.id }}" class="btn btn-secondary buttonLink">Powrót do przepisu</a>
+            <a href="/{{ recipe.ID }}" class="btn btn-secondary buttonLink">Powrót do przepisu</a>
         </form>
     </div>
 {% endblock %}

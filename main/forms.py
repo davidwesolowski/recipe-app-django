@@ -20,7 +20,7 @@ class EditProfile(forms.Form):
         email = self.cleaned_data['email']
         user = Users.objects.get(email=email)
         r = Users.objects.filter(name=name)
-        if r.count() and r[0].id != user.id:
+        if r.count() and r[0].ID != user.ID:
             raise forms.ValidationError("Taki użytkownik już istnieje")
         if 0 < len(name) < 4:
             raise forms.ValidationError("Nazwa musi mieć przynajmniej 4 znaki")

@@ -15,20 +15,6 @@ class Roles(enum.Enum):
         USER: 'UŻYTKOWNIK'
     }
 
-'''
-class Users(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField()
-    password = models.CharField(max_length=256)
-    role = enum.EnumField(Roles)
-
-    class Meta:
-        verbose_name_plural = 'Users'
-
-    def __str__(self):
-        return self.name + ' ' + str(self.id)
-'''
-
 
 class CustomUserManager(BaseUserManager):
 
@@ -51,7 +37,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class Users(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    ID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     name = models.CharField('Nazwa', max_length=200)
     email = models.EmailField('Adres email', unique=True)
     rola = enum.EnumField(Roles)
@@ -70,7 +56,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
 
 class Recipes(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    ID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     userID = models.ForeignKey(Users, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=2048)
@@ -81,4 +67,4 @@ class Recipes(models.Model):
         verbose_name_plural = 'Recipes'
 
     def __str__(self):
-        return self.title + ' ' + str(self.id)
+        return self.title + ' ' + str(self.ID)

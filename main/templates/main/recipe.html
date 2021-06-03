@@ -13,8 +13,8 @@
             <div class="card-body recipeDetails">
                 <p class="card-text recipeDescription">{{ recipe.description }}</p>
                 {% if user.is_authenticated %}
-                    {% if recipe.userID.id == user.id or role == 'ADMINISTRATOR' %}
-                        <a href="edit/{{ recipe.id }}" class="btn btn-primary buttonLink">Edytuj</a>
+                    {% if recipe.userID.ID == user.ID or role == 'ADMINISTRATOR' %}
+                        <a href="edit/{{ recipe.ID }}" class="btn btn-primary buttonLink">Edytuj</a>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Usuń
                         </button>
@@ -26,7 +26,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-footer">
-                                        <form method="post" action="delete/{{ recipe.id }}">
+                                        <form method="post" action="delete/{{ recipe.ID }}">
                                             {% csrf_token %}
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
                                             <button type="submit" class="btn btn-danger">Usuń</button>

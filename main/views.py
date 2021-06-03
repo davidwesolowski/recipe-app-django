@@ -13,20 +13,20 @@ def index(response):
     all_recipes = []
     users = Users.objects.all()
     for user in users:
-        print(user.id)
+        print(user.ID)
         for recipe in user.recipes_set.all():
-            all_recipes.append({'author': user.name, 'recipe': {"id": recipe.id, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
+            all_recipes.append({'author': user.name, 'recipe': {"ID": recipe.ID, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
     for user in users:
         for recipe in user.recipes_set.all():
-            all_recipes.append({'author': user.name, 'recipe': {"id": recipe.id, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
+            all_recipes.append({'author': user.name, 'recipe': {"ID": recipe.ID, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
 
     return render(response, 'main/recipes-list.html', {'all_recipes': all_recipes})
 
 
 def recipe(response, id):
     try:
-        recipe = Recipes.objects.get(id=id)
-        user = Users.objects.get(id=recipe.userID.id)
+        recipe = Recipes.objects.get(ID=id)
+        user = Users.objects.get(ID=recipe.userID.ID)
         role = str(response.user.rola)
         return render(response, 'main/recipe.html', {'userInfo': user, 'role': role, 'recipe': recipe, 'error': ''})
     except:
@@ -36,8 +36,8 @@ def recipe(response, id):
 @login_required
 def delete_recipe(response, id):
     try:
-        recipe = Recipes.objects.get(id=id)
-        if response.user and response.user.id == recipe.userID.id:
+        recipe = Recipes.objects.get(ID=id)
+        if response.user and response.user.ID == recipe.userID.ID:
             recipe.delete()
         return HttpResponseRedirect('/')
     except:
@@ -52,10 +52,11 @@ def create_recipe(response):
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             imageUrl = form.cleaned_data['imageUrl']
-            user = Users.objects.get(id=response.user.id)
+            user = Users.objects.get(ID=response.user.ID)
             recipe = user.recipes_set.create(title=title, description=description, imageUrl=imageUrl)
+            print(recipe.ID)
             user.save()
-            return HttpResponseRedirect('/%i' % recipe.id)
+            return HttpResponseRedirect('/%s' % recipe.ID)
     else:
         form = CreateRecipeForm()
     return render(response, 'main/create-recipe.html', {'form': form})
@@ -69,16 +70,16 @@ def edit_recipe(response, id):
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             imageUrl = form.cleaned_data['imageUrl']
-            recipe = Recipes.objects.get(id=id)
+            recipe = Recipes.objects.get(ID=id)
             recipe.title = title
             recipe.description = description
             recipe.imageUrl = imageUrl
             recipe.save()
-            return HttpResponseRedirect('/%i' % recipe.id)
+            return HttpResponseRedirect('/%s' % recipe.ID)
     else:
         try:
-            recipe = Recipes.objects.get(id=id)
-            if response.user and response.user.id == recipe.userID.id:
+            recipe = Recipes.objects.get(ID=id)
+            if response.user and response.user.ID == recipe.userID.ID:
                 form = CreateRecipeForm(initial={
                     'title': recipe.title, 'description': recipe.description, 'imageUrl': recipe.imageUrl
                 })
@@ -95,7 +96,7 @@ def profile(response):
         form = EditProfile(response.POST)
         if form.is_valid():
             try:
-                current_user = Users.objects.get(id=response.user.id)
+                current_user = Users.objects.get(ID=response.user.ID)
                 name = form.cleaned_data['name'].lower()
                 password = form.cleaned_data['password']
                 successName = ''
@@ -117,29 +118,3 @@ def profile(response):
         form = EditProfile(initial={'email': response.user.email, 'name': response.user.name})
         return render(response, 'main/profile.html', {'form': form})
 
-
-'''    
-@login_required
-def profile(response):
-    if response.method == 'POST':
-        current_user = Users.objects.get(id=response.user.id)
-        form_name = EditProfileName(response.POST)
-        if form_name.is_valid():
-            try:
-                current_user = Users.objects.get(id=response.user.id)
-                name = form_name.cleaned_data['name'].lower()
-                password = form_name.cleaned_data['password']
-                if len(name) > 0 and name != current_user.name:
-                    current_user.name = name
-                if len(password) > 0:
-                    current_user.set_password(password)
-                current_user.save()
-            except:
-                return render(response, 'main/not-found.html', {'error': 'Taki użytkownik nie istnieje!'})
-        else:
-            return render(response, 'main/profile.html', {'formName': form_name})
-        return HttpResponseRedirect('/profile')
-    else:
-        form = EditProfile(initial={'email': response.user.email,'name': response.user.name})
-        return render(response, 'main/profile.html', {'form': form})
-        '''
