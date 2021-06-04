@@ -61,7 +61,7 @@ class Recipes(models.Model):
     ID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     userID = models.ForeignKey(Users, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    description = models.CharField(max_length=2048)
+    description = models.CharField(max_length=1000)
     imageUrl = models.CharField(max_length=255)
 
     class Meta:

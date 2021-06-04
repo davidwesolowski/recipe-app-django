@@ -166,3 +166,7 @@ body {
 .alertFontSize {
     font-size: 14px;
 }
+
+.descriptionTextArea {
+    min-height: 34rem !important;
+}

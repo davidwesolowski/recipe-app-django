@@ -13,13 +13,8 @@ def index(response):
     all_recipes = []
     users = Users.objects.all()
     for user in users:
-        print(user.ID)
         for recipe in user.recipes_set.all():
             all_recipes.append({'author': user.name, 'recipe': {"ID": recipe.ID, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
-    for user in users:
-        for recipe in user.recipes_set.all():
-            all_recipes.append({'author': user.name, 'recipe': {"ID": recipe.ID, "title": recipe.title, 'imageUrl': recipe.imageUrl}})
-
     return render(response, 'main/recipes-list.html', {'all_recipes': all_recipes})
 
 
