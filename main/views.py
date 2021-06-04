@@ -22,7 +22,9 @@ def recipe(response, id):
     try:
         recipe = Recipes.objects.get(ID=id)
         user = Users.objects.get(ID=recipe.userID.ID)
-        role = str(response.user.rola)
+        role = ''
+        if response.user.is_authenticated:
+            role = str(response.user.rola)
         return render(response, 'main/recipe.html', {'userInfo': user, 'role': role, 'recipe': recipe, 'error': ''})
     except:
         return render(response, 'main/not-found.html', {'error': 'Nie ma takiego przepisu!'})
