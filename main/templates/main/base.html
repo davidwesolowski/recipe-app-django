@@ -17,13 +17,14 @@
                 <img src="{% static 'logo.png' %}"/>
             </a>
             <div class="sidebarLinks mt-3">
-                {% comment %}{% if user.is_authenticated %}
-                    <a href="/profile">Zalogowany: {{ user.name }}</a>
+                {% if user.is_authenticated %}
+                    {% block logged_in_box %}
+                        <a href="/profile">Zalogowany: {{ user.name }}</a>
+                    {% endblock %}
                     <hr />
                 {% else %}
                     <hr />
-                {% endif %}{% endcomment %}
-                <hr />
+                {% endif %}
                 <a href="/">Strona główna</a>
                 <hr />
                 {% if user.is_authenticated %}

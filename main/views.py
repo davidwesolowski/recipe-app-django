@@ -96,22 +96,22 @@ def profile(response):
                 current_user = Users.objects.get(ID=response.user.ID)
                 name = form.cleaned_data['name'].lower()
                 password = form.cleaned_data['password']
-                successName = ''
-                succcessPassword = ''
+                success_name = ''
+                succcess_password = ''
                 if len(name) > 0 and name != current_user.name:
                     current_user.name = name
-                    successName = 'Nazwa zmieniona pomyślnie\n'
+                    success_name = 'Nazwa zmieniona pomyślnie\n'
                 if len(password) > 0:
                     current_user.set_password(password)
                     update_session_auth_hash(response, current_user)
-                    succcessPassword = 'Hasło zmienione pomyślnie'
+                    succcess_password = 'Hasło zmienione pomyślnie'
                 current_user.save()
-                return render(response, 'main/profile.html', {'form': form, 'successName': successName, 'succcessPassword': succcessPassword})
+                return render(response, 'main/profile.html', {'form': form, 'success_name': success_name, 'succcess_password': succcess_password, 'current_user': current_user.name})
             except:
                 return render(response, 'main/not-found.html', {'error': 'Taki użytkownik nie istnieje!'})
         else:
             return render(response, 'main/profile.html', {'form': form})
     else:
         form = EditProfile(initial={'email': response.user.email, 'name': response.user.name})
-        return render(response, 'main/profile.html', {'form': form})
+        return render(response, 'main/profile.html', {'form': form, 'current_user': response.user.name})
 

@@ -1,5 +1,9 @@
 {% extends 'main/base.html' %}
 
+{% block logged_in_box %}
+    <a href="/profile">Zalogowany: {{ current_user }}</a>
+{% endblock %}
+
 {% block content %}
     <div class="createForm form-group border border-primary rounded p-4 shadow p-3 mb-5 bg-white rounded">
         <form method="post" action="/profile/">
@@ -16,14 +20,14 @@
             {% endif %}
             {{ form.as_p }}
             <button class="btn btn-primary" type="submit">Zaktualizuj</button>
-            {% if successName %}
+            {% if success_name %}
                 <div class="alert alert-success mt-4" style="font-size: 16px;" role="alert">
-                    {{ successName }}
+                    {{ success_name }}
                 </div>
             {% endif %}
-            {% if succcessPassword %}
+            {% if succcess_password %}
                 <div class="alert alert-success mt-4" style="font-size: 16px;" role="alert">
-                    {{ succcessPassword }}
+                    {{ succcess_password }}
                 </div>
             {% endif %}
         </form>

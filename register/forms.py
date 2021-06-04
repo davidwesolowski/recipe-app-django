@@ -52,6 +52,16 @@ class LoginForm(forms.Form):
             raise forms.ValidationError('Podany adres email nie istnieje')
         return email
 
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        email = self.cleaned_data.get('email')
+        qs = Users.objects.filter(email__iexact=email)
+        if qs.exists():
+            user = qs[0]
+            if user.check_password(password):
+                return password
+            raise forms.ValidationError('Hasło jest nieprawidłowe')
+
 
 class EmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
