@@ -8,7 +8,7 @@
                     <h4 class="card-title">Autor: {{ userInfo.name }}</h4>
                     <h3 class="card-title">Przepis na: {{ recipe.title }}</h3>
                 </div>
-                <img src="{{ recipe.imageUrl }}" alt="img-{{ row.recipe.title }}" style="width: 25%; height: 20rem; object-fit: cover;">
+                <img src="{{ recipe.imageUrl }}" alt="img-{{ recipe.title }}" style="width: 25%; height: 20rem; object-fit: cover;">
             </div>
             <div class="card-body recipeDetails">
                 <p class="card-text recipeDescription">{{ recipe.description }}</p>

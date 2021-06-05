@@ -69,4 +69,4 @@ class Recipes(models.Model):
         verbose_name_plural = 'Recipes'
 
     def __str__(self):
-        return self.title + ' ' + str(self.ID)
+        return self.title

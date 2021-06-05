@@ -151,6 +151,7 @@ body {
 .recipeCard {
     display: grid;
     place-items: center;
+    min-width: 60% !important;
 }
 
 .recipeListImg {
